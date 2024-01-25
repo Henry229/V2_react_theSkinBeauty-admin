@@ -9,6 +9,12 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.static('build'));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/build/index.html');
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(customerRoute);
