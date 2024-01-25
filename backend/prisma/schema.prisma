@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Customer {
+  id              String    @id @default(uuid())
+  firstName        String
+  lastName        String
+  mobile          String
+  email           String
+  books           Book[]     @relation("CustomerToBook")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model Book {
+  id              String    @id @default(uuid())
+  customerId      String
+  customer        Customer  @relation("CustomerToBook", fields: [customerId], references: [id])
+  serviceId       String
+  service         Service   @relation("BookToService", fields: [serviceId], references: [id])
+  startDate       DateTime
+  endDate         DateTime
+  realDuration    String
+  realPrice       Float
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([customerId])
+  @@index([serviceId])
+}
+
+model Category {
+  id              String    @id @default(uuid())
+  name            String
+  services        Service[] @relation("CategoryToService")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model Service {
+  id              String    @id @default(uuid())
+  name            String
+  price           Float
+  duration        Float
+  categoryId      String
+  category        Category  @relation("CategoryToService", fields: [categoryId], references: [id])
+  books           Book[]    @relation("BookToService")
+  // orderItems     OrderItem[] @relation("ServiceToOrderItem")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([categoryId])
+}
+
+// model Order {
+//   id              String    @id @default(uuid())
+//   orderItems      OrderItem[] 
+//   createdAt       DateTime   @default(now())
+//   updatedAt       DateTime   @updatedAt
+// }
