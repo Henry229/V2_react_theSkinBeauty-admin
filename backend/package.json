@@ -4,8 +4,8 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"Error: no build specified\" && exit 1",
+    "test": "echo \"Inform: no test specified\" && exit 1",
+    "build": "echo \"Inform: no build specified\"",
     "start": "node server.js"
   },
   "license": "MIT",
