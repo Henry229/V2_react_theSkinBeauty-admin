@@ -150,14 +150,12 @@ export default function AddEditServiceModal({
           `${process.env.REACT_APP_API_URL}/services`,
           serviceData
         );
-        // updatedCustomer = response.data;
         toast.success('Created service data successfully');
       }
       mutate('services');
 
       setTimeout(() => {
         onClose();
-        // navigate('/customer');
       }, 2000);
     } catch (error) {
       console.error('An error occurred:', error);
