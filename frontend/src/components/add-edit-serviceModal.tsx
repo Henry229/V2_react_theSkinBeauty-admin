@@ -134,7 +134,7 @@ export default function AddEditServiceModal({
       let response;
       const serviceData = {
         ...data,
-        duration: durationInMinutes, // 변환된 duration 값을 사용합니다.
+        duration: durationInMinutes,
       };
       if (service) {
         console.log('>>>>update: ', serviceData, '/', service.id);
