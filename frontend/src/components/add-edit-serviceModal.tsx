@@ -116,6 +116,7 @@ export default function AddEditServiceModal({
   };
 
   // 모달창 안을 클릭했을때 모달창이 닫히지 않도록 합니다.
+  // 이벤트 버블링을 막아줍니다.
   const handleModalClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
